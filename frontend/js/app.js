@@ -21,19 +21,15 @@ function apiMessage(data) {
   if (!data) {
     return "Request failed.";
   }
-
   if (typeof data.error === "string") {
     return data.error;
   }
-
   if (typeof data.Message === "string") {
     return data.Message;
   }
-
   if (typeof data.message === "string") {
     return data.message;
   }
-
   return "Request failed.";
 }
 
@@ -49,6 +45,11 @@ async function createPayment() {
   }
 
   if (!form.reportValidity()) {
+    return;
+  }
+
+  if (!window.API_BASE) {
+    showError("API_BASE is not set in env.js");
     return;
   }
 

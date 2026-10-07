@@ -1,16 +1,7 @@
 # OX Processing · Frontend
 
-Checkout UI for 0xProcessing payments.
+Static checkout UI. Backend lives in the `ox-backend` repo.
 
-Backend is separate: https://github.com/faizankhalid1234/ox-backend
-
-## API URL
-
-Edit `frontend/js/config.js`:
-
-- Local: `http://localhost:3000`
-- Production: your backend Vercel URL (default `https://ox-backend.vercel.app`)
-
-## Deploy
-
-Deploy this repo as a **static** Vercel project. Deploy `ox-backend` as a separate Node project.
+1. Copy `frontend/js/env.example.js` → `frontend/js/env.js`
+2. Set `window.API_BASE` in `env.js`
+3. Deploy as a static site on Vercel
