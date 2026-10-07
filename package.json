@@ -2,5 +2,10 @@
   "name": "ox-processing-frontend",
   "version": "1.0.0",
   "private": true,
-  "description": "OX Processing checkout frontend"
+  "description": "OX Processing checkout frontend",
+  "scripts": {
+    "sync-env": "node frontend/scripts/sync-env.js",
+    "prebuild": "npm run sync-env",
+    "build": "npm run sync-env"
+  }
 }
