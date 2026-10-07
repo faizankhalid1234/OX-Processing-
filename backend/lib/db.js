@@ -1,13 +1,16 @@
 const path = require("path");
 const fs = require("fs");
 const { Pool } = require("pg");
-const EmbeddedPostgres = require("embedded-postgres").default;
 const { config } = require("./config");
 
 let pool = null;
 let embedded = null;
 
 async function startEmbeddedPostgres() {
+  // Lazy ESM import — never load on Vercel / Neon (avoids ERR_REQUIRE_ESM)
+  const mod = await import("embedded-postgres");
+  const EmbeddedPostgres = mod.default;
+
   const databaseDir = path.join(config.dataDir, "pg");
   fs.mkdirSync(databaseDir, { recursive: true });
 
