@@ -1,0 +1,21 @@
+{
+  "name": "cryptoprocessing-checkout",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CryptoProcessing checkout with backend and frontend folders",
+  "main": "backend/index.js",
+  "scripts": {
+    "start": "node backend/index.js",
+    "dev": "node --watch backend/index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "embedded-postgres": "^18.4.0-beta.17",
+    "express": "^4.21.2",
+    "pg": "^8.23.1"
+  }
+}

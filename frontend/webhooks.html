@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webhook log</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+      .webhook-list {
+        display: grid;
+        gap: 14px;
+        margin-top: 18px;
+      }
+      .webhook-item pre {
+        margin: 8px 0 0;
+        padding: 12px;
+        border-radius: 12px;
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid var(--line);
+        overflow: auto;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="state-page">
+      <div class="state-card" style="max-width: 820px; width: 100%">
+        <p class="eyebrow">0xProcessing</p>
+        <h1>Webhook log</h1>
+        <p class="hint">
+          Exact JSON jo 0xProcessing webhook se aata hai — Success / Failed.
+          Auto refresh every 5s.
+        </p>
+        <a class="ghost" href="/">Back to checkout</a>
+        <div class="webhook-list" id="list">Loading…</div>
+      </div>
+    </div>
+    <script>
+      const list = document.getElementById("list");
+
+      async function load() {
+        try {
+          const res = await fetch("/api/webhooks/latest");
+          const data = await res.json();
+          const rows = (data && data.data) || [];
+
+          if (!rows.length) {
+            list.innerHTML =
+              "<p class='hint'>Abhi koi webhook nahi. Scan page pe Confirm / Cancel dabao.</p>";
+            return;
+          }
+
+          list.innerHTML = rows
+            .map((row) => {
+              const status =
+                (row.webhook && row.webhook.Status) || row.database_status || "-";
+              return (
+                "<div class='webhook-item'>" +
+                "<strong>" +
+                status +
+                "</strong> · PaymentId " +
+                (row.payment_id || "-") +
+                " · " +
+                (row.billing_id || "-") +
+                "<pre>" +
+                JSON.stringify(row.webhook, null, 2) +
+                "</pre></div>"
+              );
+            })
+            .join("");
+        } catch (error) {
+          list.innerHTML = "<p class='hint'>" + error.message + "</p>";
+        }
+      }
+
+      load();
+      setInterval(load, 5000);
+    </script>
+  </body>
+</html>
