@@ -53,11 +53,6 @@ async function createPayment() {
     return;
   }
 
-  if (!testPayOn) {
-    showError("Pehle Test pay pe ✓ lagaao — ye testing payment hogi.");
-    return;
-  }
-
   paying = true;
   submitBtn.disabled = true;
   testPayBox.disabled = true;
