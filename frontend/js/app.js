@@ -4,7 +4,7 @@ const testPayBox = document.getElementById("testPayBox");
 const formError = document.getElementById("formError");
 
 let paying = false;
-let testPayOn = false;
+let testPayOn = true;
 
 function showError(message) {
   if (!message) {
@@ -100,3 +100,5 @@ form.addEventListener("submit", (event) => {
 testPayBox.addEventListener("click", () => {
   setTestPay(!testPayOn);
 });
+
+setTestPay(true);
