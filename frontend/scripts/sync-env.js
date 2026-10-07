@@ -35,8 +35,15 @@ function readEnv(filePath) {
   return map;
 }
 
-const env = readEnv(envPath);
-const apiBase = String(env.API_BASE || "").replace(/\/$/, "");
+const fileEnv = readEnv(envPath);
+const apiBase = String(process.env.API_BASE || fileEnv.API_BASE || "")
+  .trim()
+  .replace(/\/$/, "");
+
+if (!apiBase) {
+  console.error("API_BASE missing. Set frontend/.env or Vercel env API_BASE.");
+  process.exit(1);
+}
 
 fs.writeFileSync(
   outPath,
@@ -44,4 +51,4 @@ fs.writeFileSync(
   "utf8"
 );
 
-console.log("Wrote js/env.js from .env");
+console.log("Wrote js/env.js");
