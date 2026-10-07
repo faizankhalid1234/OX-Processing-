@@ -38,12 +38,13 @@
         <div class="webhook-list" id="list">Loading…</div>
       </div>
     </div>
+    <script src="/js/config.js"></script>
     <script>
       const list = document.getElementById("list");
 
       async function load() {
         try {
-          const res = await fetch("/api/webhooks/latest");
+          const res = await fetch(apiUrl("/api/webhooks/latest"));
           const data = await res.json();
           const rows = (data && data.data) || [];
 

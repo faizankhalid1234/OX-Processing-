@@ -13,7 +13,7 @@ async function go() {
     return;
   }
 
-  const res = await fetch("/api/transactions/approve", {
+  const res = await fetch(apiUrl("/api/transactions/approve"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ transaction_id: id }),

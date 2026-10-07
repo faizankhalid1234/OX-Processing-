@@ -28,7 +28,7 @@ async function loadTransaction() {
     return null;
   }
 
-  const res = await fetch("/api/transactions/" + encodeURIComponent(id));
+  const res = await fetch(apiUrl("/api/transactions/" + encodeURIComponent(id)));
   const data = await res.json();
   return data;
 }
@@ -98,7 +98,7 @@ approveBtn.addEventListener("click", async () => {
   approveBtn.disabled = true;
 
   try {
-    const res = await fetch("/api/transactions/approve", {
+    const res = await fetch(apiUrl("/api/transactions/approve"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ transaction_id: id }),

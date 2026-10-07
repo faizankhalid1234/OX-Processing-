@@ -67,7 +67,7 @@ async function createPayment() {
       end_user_reference: form.end_user_reference.value || undefined,
     };
 
-    const res = await fetch("/api/payments/hosted", {
+    const res = await fetch(apiUrl("/api/payments/hosted"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

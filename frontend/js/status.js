@@ -8,7 +8,7 @@ function startStatusPoll(options) {
       return;
     }
 
-    const res = await fetch("/api/transactions/" + encodeURIComponent(id));
+    const res = await fetch(apiUrl("/api/transactions/" + encodeURIComponent(id)));
     const data = await res.json();
     const status = data && data.status ? data.status : null;
 

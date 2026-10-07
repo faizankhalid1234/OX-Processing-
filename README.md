@@ -1,26 +1,16 @@
-# OX Processing · 0xProcessing checkout
+# OX Processing · Frontend
 
-```text
-backend/          API, webhook, PostgreSQL
-backend/.env      keys + DATABASE_URL
-frontend/         Checkout + pending approve page
-```
+Checkout UI for 0xProcessing payments.
 
-## Setup
+Backend is separate: https://github.com/faizankhalid1234/ox-backend
 
-1. Fill `backend/.env` (`OXP_MERCHANT_ID`, `OXP_API_KEY`, `OXP_WEBHOOK_PASSWORD`).
-2. `npm install`
-3. `npm start`
-4. Open http://localhost:3000
+## API URL
 
-By default `USE_EMBEDDED_POSTGRES=true` starts a local PostgreSQL in `backend/data/pg`.
-For your own Postgres set `USE_EMBEDDED_POSTGRES=false` and a real `DATABASE_URL`.
+Edit `frontend/js/config.js`:
 
-## Payment flow
+- Local: `http://localhost:3000`
+- Production: your backend Vercel URL (default `https://ox-backend.vercel.app`)
 
-1. Create payment → row saved as `pending` in `transactions`.
-2. 0xProcessing webhook updates status to `paid` / `failed`.
-3. Pending page polls `/api/transactions/:id` every 3s.
-4. Approve button calls `/api/transactions/approve` only if that ID exists and status is `paid`.
+## Deploy
 
-Webhook callback URL in `.env`: `CALLBACK_PUBLIC_URL` (also set the same URL in the 0xProcessing portal).
+Deploy this repo as a **static** Vercel project. Deploy `ox-backend` as a separate Node project.
