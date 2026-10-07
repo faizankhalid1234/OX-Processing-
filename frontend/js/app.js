@@ -97,8 +97,9 @@ form.addEventListener("submit", (event) => {
   createPayment();
 });
 
-testPayBox.addEventListener("click", () => {
-  setTestPay(!testPayOn);
-});
-
 setTestPay(true);
+
+testPayBox.addEventListener("click", (event) => {
+  event.preventDefault();
+  setTestPay(true);
+});

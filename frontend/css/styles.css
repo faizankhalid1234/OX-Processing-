@@ -233,7 +233,8 @@ select {
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.03);
   color: var(--text);
-  cursor: pointer;
+  cursor: default;
+  pointer-events: none;
 }
 
 .test-pay:hover,
