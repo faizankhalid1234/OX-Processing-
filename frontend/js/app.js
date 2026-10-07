@@ -53,6 +53,11 @@ async function createPayment() {
     return;
   }
 
+  if (!testPayOn) {
+    showError("Pehle Test pay pe ✓ lagaao — ye testing payment hogi.");
+    return;
+  }
+
   paying = true;
   submitBtn.disabled = true;
   testPayBox.disabled = true;
@@ -66,6 +71,7 @@ async function createPayment() {
       first_name: form.first_name.value || undefined,
       last_name: form.last_name.value || undefined,
       end_user_reference: form.end_user_reference.value || undefined,
+      test: true,
     };
 
     const res = await fetch(apiUrl("/api/payments/hosted"), {
